@@ -7,10 +7,11 @@
 
 import SwiftUI
 
+// 아무런 응답 없는 것도 고려해야 함.
+
 struct ContentView: View {
     @State private var messageText = ""
-    @State var messages: [String] = ["Welcome to Chat Bot 2.0"]
-    
+    @State var messages: [String] = ["Eliza ChatBot입니다😃"]
     
     var body: some View {
         VStack {
@@ -26,8 +27,9 @@ struct ContentView: View {
                 // Messages
                 ForEach(messages, id: \.self) { message in
                     if message.contains("[USER]") {
+                        let _ = print(message)
                         let newMessage = message.replacingOccurrences(of: "[USER]", with: "")
-                        
+                        let _ = print(newMessage)
                         HStack {
                             Spacer()
                             Text(newMessage)
@@ -40,7 +42,6 @@ struct ContentView: View {
                         }
                     } else {
                         HStack {
-                            
                             Text(message)
                                 .padding()
                                 .background(.white.opacity(1.0))
@@ -86,9 +87,7 @@ struct ContentView: View {
                 messages.append(getBotResponse(message: message))
             }
         }
-        
     }
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
